@@ -49,7 +49,9 @@ def confirm(query, quit_ = True):
 
 def format(string, type_):
     if _CAN_ANSI_FORMAT_WINDOWS:
-        kernel32 = import_handler("ctypes.windll.kernel32")
+        # kernel32 = import_handler("ctypes.windll.kernel32") # windll import does not work this way
+        ctypesHandle = import_handler("ctypes")
+        kernel32 = ctypesHandle.windll.kernel32
         kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
 
     if _CAN_ANSI_FORMAT:
